@@ -1,0 +1,25 @@
+// -*- MPC -*-
+// $Id: Config_XML.mpc
+
+project(device_state) : acelib,hisign{
+  sharedname    = device_state
+  dynamicflags += DEVICE_STATE_BUILD_DLL
+  dllout       =  $(FARS_V2x5_ROOT)/bin
+  libout       =  $(FARS_V2x5_ROOT)/lib
+  includes     += $(FARS_V2x5_ROOT)/include
+  
+  Source_Files {
+    Device_State.cpp
+  }
+}
+
+project(device_test): acelib{
+  exename      = device_test
+  exeout       = $(FARS_V2x5_ROOT)/bin
+  libpaths    += $(FARS_V2x5_ROOT)/lib
+  libs        += Device_State
+  Source_Files{
+	device_test.cpp
+  }
+  after += Device_State
+}
